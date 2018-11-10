@@ -29,5 +29,11 @@ namespace RefactorTdd
         {
             return Amount / DateTime.DaysInMonth(Year, Month);
         }
+
+        public DateTime LastDay()
+        {
+            var daysInMonth = DateTime.DaysInMonth(Year, Month);
+            return new DateTime(FirstDayOfMonth().Year, FirstDayOfMonth().Month, daysInMonth);
+        }
     }
 }

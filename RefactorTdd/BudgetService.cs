@@ -51,7 +51,8 @@ namespace RefactorTdd
                         if (IsFirstMonth(start, currentMonth))
                         {
                             intervalStart = start;
-                            intervalEnd = LastDayOfMonth(start);
+                            intervalEnd = budgetByMonth.LastDay();
+                            //intervalEnd = LastDayOfMonth(start);
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
