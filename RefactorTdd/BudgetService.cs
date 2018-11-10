@@ -31,21 +31,11 @@ namespace RefactorTdd
 
         private static double OverlappingAmountBetweenBudgets(Period period, List<Budget> budgets)
         {
-            //DateTime currentMonth = new DateTime(period.Start.Year, period.Start.Month, 1);
             double totalAmount = 0;
-            //do
-            //{
-            //    var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
-            //    if (budgetByMonth != null)
-            //    {
             foreach (var budgetByMonth in budgets)
             {
                 totalAmount += budgetByMonth.IntervalAmount(period);
             }
-            //}
-
-            //    currentMonth = currentMonth.AddMonths(1);
-            //} while (currentMonth <= period.End);
 
             return totalAmount;
         }
