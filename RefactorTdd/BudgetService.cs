@@ -13,6 +13,29 @@ namespace RefactorTdd
 
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
+
+        public int IntervalDays(Budget budgetByMonth)
+        {
+            DateTime intervalStart;
+            DateTime intervalEnd;
+            if (budgetByMonth.FirstDay().ToString("yyyyMM") == Start.ToString("yyyyMM"))
+            {
+                intervalStart = Start;
+                intervalEnd = budgetByMonth.LastDay();
+            }
+            else if (budgetByMonth.FirstDay().ToString("yyyyMM") == End.ToString("yyyyMM"))
+            {
+                intervalStart = budgetByMonth.FirstDay();
+                intervalEnd = End;
+            }
+            else
+            {
+                intervalStart = budgetByMonth.FirstDay();
+                intervalEnd = budgetByMonth.LastDay();
+            }
+
+            return (intervalEnd - intervalStart).Days + 1;
+        }
     }
 
     public class BudgetService
@@ -59,7 +82,7 @@ namespace RefactorTdd
                     var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        var intervalDays = IntervalDays(period, budgetByMonth);
+                        var intervalDays = period.IntervalDays(budgetByMonth);
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
@@ -68,29 +91,6 @@ namespace RefactorTdd
 
                 return totalAmount;
             }
-        }
-
-        private static int IntervalDays(Period period, Budget budgetByMonth)
-        {
-            DateTime intervalStart;
-            DateTime intervalEnd;
-            if (budgetByMonth.FirstDay().ToString("yyyyMM") == period.Start.ToString("yyyyMM"))
-            {
-                intervalStart = period.Start;
-                intervalEnd = budgetByMonth.LastDay();
-            }
-            else if (budgetByMonth.FirstDay().ToString("yyyyMM") == period.End.ToString("yyyyMM"))
-            {
-                intervalStart = budgetByMonth.FirstDay();
-                intervalEnd = period.End;
-            }
-            else
-            {
-                intervalStart = budgetByMonth.FirstDay();
-                intervalEnd = budgetByMonth.LastDay();
-            }
-
-            return (intervalEnd - intervalStart).Days + 1;
         }
 
         private static bool IsSameMonth(DateTime start, DateTime end)
