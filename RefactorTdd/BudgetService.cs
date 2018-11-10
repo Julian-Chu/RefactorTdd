@@ -31,30 +31,28 @@ namespace RefactorTdd
         public double TotalAmount(DateTime start, DateTime end)
         {
             var period = new Period(start, end);
-            var mystart = period.Start;
-            var myEnd = period.End;
-            if (!IsValidDateRange(mystart, myEnd))
+            if (!IsValidDateRange(period.Start, period.End))
             {
                 return 0;
             }
 
             var budgets = _repo.GetAll();
 
-            if (IsSameMonth(mystart, myEnd))
+            if (IsSameMonth(period.Start, period.End))
             {
-                var budget = budgets.SingleOrDefault(x => x.YearMonth.Equals(mystart.ToString("yyyyMM")));
+                var budget = budgets.SingleOrDefault(x => x.YearMonth.Equals(period.Start.ToString("yyyyMM")));
                 if (budget == null)
                 {
                     return 0;
                 }
 
                 var dailyAmount = budget.DailyAmountOfBudget();
-                var intervalDays = DaysInterval(mystart, myEnd);
+                var intervalDays = DaysInterval(period.Start, period.End);
                 return dailyAmount * intervalDays;
             }
             else
             {
-                DateTime currentMonth = new DateTime(mystart.Year, mystart.Month, 1);
+                DateTime currentMonth = new DateTime(period.Start.Year, period.Start.Month, 1);
                 double totalAmount = 0;
                 do
                 {
@@ -66,7 +64,7 @@ namespace RefactorTdd
                     }
 
                     currentMonth = currentMonth.AddMonths(1);
-                } while (currentMonth <= myEnd);
+                } while (currentMonth <= period.End);
 
                 return totalAmount;
             }
