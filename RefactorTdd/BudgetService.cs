@@ -33,7 +33,7 @@ namespace RefactorTdd
                     return 0;
                 }
 
-                var dailyAmount = DailyAmountOfBudget(budget, start);
+                var dailyAmount = DailyAmountOfBudget(budget);
                 var intervalDays = DaysInterval(start, end);
                 return dailyAmount * intervalDays;
             }
@@ -51,17 +51,17 @@ namespace RefactorTdd
                         int intervalDays = 0;
                         if (IsFirstMonth(start, currentMonth))
                         {
-                            dailyAmount = DailyAmountOfBudget(budgetByMonth, start);
+                            dailyAmount = DailyAmountOfBudget(budgetByMonth);
                             intervalDays = (DateTime.DaysInMonth(start.Year, start.Month) - start.Day + 1);
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
-                            dailyAmount = DailyAmountOfBudget(budgetByMonth, end);
+                            dailyAmount = DailyAmountOfBudget(budgetByMonth);
                             intervalDays = end.Day;
                         }
                         else
                         {
-                            dailyAmount = DailyAmountOfBudget(budgetByMonth, currentMonth);
+                            dailyAmount = DailyAmountOfBudget(budgetByMonth);
                             intervalDays = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
                         }
                         totalAmount += dailyAmount * intervalDays;
@@ -89,10 +89,9 @@ namespace RefactorTdd
             return start.ToString("yyyyMM") == end.ToString("yyyyMM");
         }
 
-        private static int DailyAmountOfBudget(Budget budgetByMonth, DateTime tempDate)
+        private static int DailyAmountOfBudget(Budget budgetByMonth)
         {
             return budgetByMonth.Amount / DateTime.DaysInMonth(budgetByMonth.Year, budgetByMonth.Month);
-            //return budgetByMonth.Amount / DateTime.DaysInMonth(tempDate.Year, tempDate.Month);
         }
 
         private static bool IsValidDateRange(DateTime start, DateTime end)
