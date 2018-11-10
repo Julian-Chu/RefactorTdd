@@ -15,12 +15,7 @@ namespace RefactorTdd
 
         public int IntervalDays(Period another)
         {
-            if (IsInvalid())
-            {
-                return 0;
-            }
-
-            if (HasNoOverlap(another))
+            if (IsInvalid() || HasNoOverlap(another))
             {
                 return 0;
             }
