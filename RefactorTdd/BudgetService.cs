@@ -30,6 +30,7 @@ namespace RefactorTdd
 
         public double TotalAmount(DateTime start, DateTime end)
         {
+            var period = new Period(start, end);
             if (!IsValidDateRange(start, end))
             {
                 return 0;
@@ -58,7 +59,7 @@ namespace RefactorTdd
                     var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        var intervalDays = IntervalDays(new Period(start, end), budgetByMonth);
+                        var intervalDays = IntervalDays(period, budgetByMonth);
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
