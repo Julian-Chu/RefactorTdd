@@ -31,8 +31,8 @@ namespace RefactorTdd
         public double TotalAmount(DateTime start, DateTime end)
         {
             var period = new Period(start, end);
-            var mystart = start;
-            var myEnd = end;
+            var mystart = period.Start;
+            var myEnd = period.End;
             if (!IsValidDateRange(mystart, myEnd))
             {
                 return 0;
