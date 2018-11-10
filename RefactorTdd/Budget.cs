@@ -11,18 +11,18 @@ namespace RefactorTdd
         {
             get
             {
-                return FirstDayOfMonth().Year;
+                return FirstDay().Year;
             }
         }
 
-        public DateTime FirstDayOfMonth()
+        public DateTime FirstDay()
         {
             return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
 
         public int Month
         {
-            get { return FirstDayOfMonth().Month; }
+            get { return FirstDay().Month; }
         }
 
         public int DailyAmountOfBudget()
@@ -33,7 +33,7 @@ namespace RefactorTdd
         public DateTime LastDay()
         {
             var daysInMonth = DateTime.DaysInMonth(Year, Month);
-            return new DateTime(FirstDayOfMonth().Year, FirstDayOfMonth().Month, daysInMonth);
+            return new DateTime(FirstDay().Year, FirstDay().Month, daysInMonth);
         }
 
     }

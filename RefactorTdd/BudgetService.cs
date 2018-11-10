@@ -74,19 +74,19 @@ namespace RefactorTdd
         {
             DateTime intervalStart;
             DateTime intervalEnd;
-            if (IsFirstMonth(period.Start, budgetByMonth.FirstDayOfMonth()))
+            if (IsFirstMonth(period.Start, budgetByMonth.FirstDay()))
             {
                 intervalStart = period.Start;
                 intervalEnd = budgetByMonth.LastDay();
             }
-            else if (IsLastMonth(period.End, budgetByMonth.FirstDayOfMonth()))
+            else if (IsLastMonth(period.End, budgetByMonth.FirstDay()))
             {
-                intervalStart = budgetByMonth.FirstDayOfMonth();
+                intervalStart = budgetByMonth.FirstDay();
                 intervalEnd = period.End;
             }
             else
             {
-                intervalStart = budgetByMonth.FirstDayOfMonth();
+                intervalStart = budgetByMonth.FirstDay();
                 intervalEnd = budgetByMonth.LastDay();
             }
 
