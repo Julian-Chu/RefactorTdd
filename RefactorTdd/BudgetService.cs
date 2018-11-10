@@ -69,7 +69,7 @@ namespace RefactorTdd
                     return 0;
                 }
 
-                var dailyAmount = budget.DailyAmountOfBudget();
+                var dailyAmount = budget.DailyAmount();
                 var intervalDays = DaysInterval(period.Start, period.End);
                 return dailyAmount * intervalDays;
             }
@@ -82,7 +82,7 @@ namespace RefactorTdd
                     var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        totalAmount += budgetByMonth.DailyAmountOfBudget() * period.IntervalDays(budgetByMonth);
+                        totalAmount += budgetByMonth.DailyAmount() * period.IntervalDays(budgetByMonth);
                     }
 
                     currentMonth = currentMonth.AddMonths(1);
