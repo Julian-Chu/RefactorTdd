@@ -34,7 +34,7 @@ namespace RefactorTdd
                     return 0;
                 }
 
-                return IntervalAmount(budget, period);
+                return budget.IntervalAmount(period);
             }
             else
             {
@@ -53,11 +53,6 @@ namespace RefactorTdd
 
                 return totalAmount;
             }
-        }
-
-        private static double IntervalAmount(Budget budget, Period period)
-        {
-            return budget.DailyAmount() * period.IntervalDays(budget);
         }
 
         private static bool IsSameMonth(DateTime start, DateTime end)

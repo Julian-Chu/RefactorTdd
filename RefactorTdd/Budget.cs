@@ -36,5 +36,9 @@ namespace RefactorTdd
             return new DateTime(FirstDay().Year, FirstDay().Month, daysInMonth);
         }
 
+        public double IntervalAmount(Period period)
+        {
+            return DailyAmount() * period.IntervalDays(this);
+        }
     }
 }
