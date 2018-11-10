@@ -54,20 +54,21 @@ namespace RefactorTdd
                         {
                             intervalStart = start;
                             intervalEnd = LastDayOfMonth(start);
-                            intervalDays = IntervalDays(intervalStart, intervalEnd);
+                            //intervalDays = IntervalDays(intervalStart, intervalEnd);
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
                             intervalStart = FirstDayofMonth(end);
                             intervalEnd = end;
-                            intervalDays = IntervalDays(intervalStart, intervalEnd);
+                            //intervalDays = IntervalDays(intervalStart, intervalEnd);
                         }
                         else
                         {
                             intervalStart = FirstDayofMonth(currentMonth);
                             intervalEnd = LastDayOfMonth(currentMonth);
-                            intervalDays = IntervalDays(intervalStart, intervalEnd);
+                            //intervalDays = IntervalDays(intervalStart, intervalEnd);
                         }
+                        intervalDays = IntervalDays(intervalStart, intervalEnd);
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
