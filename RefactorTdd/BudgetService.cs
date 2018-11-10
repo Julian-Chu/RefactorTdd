@@ -34,8 +34,8 @@ namespace RefactorTdd
                 }
 
                 var dailyAmount = AmountPerDayInMonth(budget, start);
-                //var dailyAmount = budget.Amount / DateTime.DaysInMonth(start.Year, start.Month);
-                return dailyAmount * DaysInterval(start, end);
+                var intervalDays = DaysInterval(start, end);
+                return dailyAmount * intervalDays;
             }
             else
             {
@@ -48,13 +48,24 @@ namespace RefactorTdd
                     if (budgetByMonth != null)
                     {
                         if (IsFirstMonth(start, currentMonth))
-                            totalAmount += AmountPerDayInMonth(budgetByMonth, start) *
-                                          (DateTime.DaysInMonth(start.Year, start.Month) - start.Day + 1);
+                        {
+                            var dailyAmount = AmountPerDayInMonth(budgetByMonth, start);
+                            var intervalDays = (DateTime.DaysInMonth(start.Year, start.Month) - start.Day + 1);
+
+                            totalAmount += dailyAmount * intervalDays;
+                        }
                         else if (IsLastMonth(end, currentMonth))
-                            totalAmount += AmountPerDayInMonth(budgetByMonth, end) * end.Day;
+                        {
+                            var dailyAmount = AmountPerDayInMonth(budgetByMonth, end);
+                            var intervalDays = end.Day;
+                            totalAmount += dailyAmount * intervalDays;
+                        }
                         else
-                            totalAmount += AmountPerDayInMonth(budgetByMonth, currentMonth) * DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
-                        //totalAmount += budgetByMonth.Amount;
+                        {
+                            var dailyAmount = AmountPerDayInMonth(budgetByMonth, currentMonth);
+                            var intervalDays = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
+                            totalAmount += dailyAmount * intervalDays;
+                        }
                     }
 
                     currentMonth = currentMonth.AddMonths(1);
