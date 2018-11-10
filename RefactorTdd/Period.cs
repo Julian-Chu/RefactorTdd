@@ -34,7 +34,7 @@ namespace RefactorTdd
             return (intervalEnd - intervalStart).Days + 1;
         }
 
-        public bool IsValidDateRange()
+        private bool IsValidDateRange()
         {
             return Start <= End;
         }
