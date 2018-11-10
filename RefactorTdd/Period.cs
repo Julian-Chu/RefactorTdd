@@ -20,17 +20,13 @@ namespace RefactorTdd
                 return 0;
             }
 
-            DateTime intervalEnd = End;
-            if (End > another.End)
-            {
-                intervalEnd = another.End;
-            }
+            DateTime intervalEnd = End > another.End
+            ? another.End
+            : End;
 
-            DateTime intervalStart = Start;
-            if (Start < another.Start)
-            {
-                intervalStart = another.Start;
-            }
+            DateTime intervalStart = Start < another.Start
+            ? another.Start
+            : Start;
 
             return (intervalEnd - intervalStart).Days + 1;
         }
