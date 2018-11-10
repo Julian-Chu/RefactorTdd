@@ -15,7 +15,7 @@ namespace RefactorTdd
             }
         }
 
-        private DateTime FirstDayOfMonth()
+        public DateTime FirstDayOfMonth()
         {
             return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
@@ -35,5 +35,6 @@ namespace RefactorTdd
             var daysInMonth = DateTime.DaysInMonth(Year, Month);
             return new DateTime(FirstDayOfMonth().Year, FirstDayOfMonth().Month, daysInMonth);
         }
+
     }
 }
