@@ -22,15 +22,5 @@ namespace RefactorTdd
 
             return _repo.GetAll().Sum(b => b.IntervalAmount(period));
         }
-
-        private static bool IsSameMonth(DateTime start, DateTime end)
-        {
-            return start.ToString("yyyyMM") == end.ToString("yyyyMM");
-        }
-
-        private static int DaysInterval(DateTime start, DateTime end)
-        {
-            return end.Subtract(start).Days + 1;
-        }
     }
 }
