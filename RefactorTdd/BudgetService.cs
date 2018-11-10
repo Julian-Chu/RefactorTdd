@@ -54,21 +54,19 @@ namespace RefactorTdd
                         {
                             intervalStart = start;
                             intervalEnd = LastDayOfMonth(start);
-                            //intervalDays = IntervalDays(intervalStart, intervalEnd);
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
                             intervalStart = FirstDayofMonth(end);
                             intervalEnd = end;
-                            //intervalDays = IntervalDays(intervalStart, intervalEnd);
                         }
                         else
                         {
                             intervalStart = FirstDayofMonth(currentMonth);
                             intervalEnd = LastDayOfMonth(currentMonth);
-                            //intervalDays = IntervalDays(intervalStart, intervalEnd);
                         }
-                        intervalDays = IntervalDays(intervalStart, intervalEnd);
+
+                        intervalDays = (intervalEnd - intervalStart).Days + 1;
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
@@ -83,11 +81,6 @@ namespace RefactorTdd
         {
             var intervalStart = new DateTime(end.Year, end.Month, 1);
             return intervalStart;
-        }
-
-        private static int IntervalDays(DateTime intervalStart, DateTime intervalEnd)
-        {
-            return (intervalEnd - intervalStart).Days + 1;
         }
 
         private static DateTime LastDayOfMonth(DateTime start)
