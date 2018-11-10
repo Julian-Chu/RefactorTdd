@@ -15,6 +15,10 @@ namespace RefactorTdd
 
         public int IntervalDays(Budget budgetByMonth)
         {
+            if (!IsValidDateRange())
+            {
+                return 0;
+            }
             DateTime intervalEnd = End;
             if (End > budgetByMonth.LastDay())
             {

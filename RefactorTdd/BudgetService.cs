@@ -19,10 +19,6 @@ namespace RefactorTdd
         public double TotalAmount(DateTime start, DateTime end)
         {
             var period = new Period(start, end);
-            if (!period.IsValidDateRange())
-            {
-                return 0;
-            }
 
             return _repo.GetAll().Sum(b => b.IntervalAmount(period));
         }
