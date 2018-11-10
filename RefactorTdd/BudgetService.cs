@@ -46,27 +46,7 @@ namespace RefactorTdd
                     var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        DateTime intervalStart;
-                        DateTime intervalEnd;
-                        if (IsFirstMonth(start, budgetByMonth.FirstDayOfMonth()))
-                        //if (IsFirstMonth(start, currentMonth))
-                        {
-                            intervalStart = start;
-                            intervalEnd = budgetByMonth.LastDay();
-                        }
-                        else if (IsLastMonth(end, budgetByMonth.FirstDayOfMonth()))
-                        //else if (IsLastMonth(end, currentMonth))
-                        {
-                            intervalStart = budgetByMonth.FirstDayOfMonth();
-                            intervalEnd = end;
-                        }
-                        else
-                        {
-                            intervalStart = budgetByMonth.FirstDayOfMonth();
-                            intervalEnd = budgetByMonth.LastDay();
-                        }
-
-                        var intervalDays = (intervalEnd - intervalStart).Days + 1;
+                        var intervalDays = IntervalDays(start, end, budgetByMonth);
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
@@ -75,6 +55,30 @@ namespace RefactorTdd
 
                 return totalAmount;
             }
+        }
+
+        private static int IntervalDays(DateTime start, DateTime end, Budget budgetByMonth)
+        {
+            DateTime intervalStart;
+            DateTime intervalEnd;
+            if (IsFirstMonth(start, budgetByMonth.FirstDayOfMonth()))
+            {
+                intervalStart = start;
+                intervalEnd = budgetByMonth.LastDay();
+            }
+            else if (IsLastMonth(end, budgetByMonth.FirstDayOfMonth()))
+            {
+                intervalStart = budgetByMonth.FirstDayOfMonth();
+                intervalEnd = end;
+            }
+            else
+            {
+                intervalStart = budgetByMonth.FirstDayOfMonth();
+                intervalEnd = budgetByMonth.LastDay();
+            }
+
+            var intervalDays = (intervalEnd - intervalStart).Days + 1;
+            return intervalDays;
         }
 
         private static DateTime FirstDayOfMonth(DateTime end)
