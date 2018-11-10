@@ -33,7 +33,7 @@ namespace RefactorTdd
                     return 0;
                 }
 
-                var dailyAmount = AmountPerDayInMonth(budget, start);
+                var dailyAmount = DailyAmountOfBudget(budget, start);
                 var intervalDays = DaysInterval(start, end);
                 return dailyAmount * intervalDays;
             }
@@ -51,22 +51,18 @@ namespace RefactorTdd
                         int intervalDays = 0;
                         if (IsFirstMonth(start, currentMonth))
                         {
-                            dailyAmount = AmountPerDayInMonth(budgetByMonth, start);
+                            dailyAmount = DailyAmountOfBudget(budgetByMonth, start);
                             intervalDays = (DateTime.DaysInMonth(start.Year, start.Month) - start.Day + 1);
-
-                            //totalAmount += dailyAmount * intervalDays;
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
-                            dailyAmount = AmountPerDayInMonth(budgetByMonth, end);
+                            dailyAmount = DailyAmountOfBudget(budgetByMonth, end);
                             intervalDays = end.Day;
-                            //totalAmount += dailyAmount * intervalDays;
                         }
                         else
                         {
-                            dailyAmount = AmountPerDayInMonth(budgetByMonth, currentMonth);
+                            dailyAmount = DailyAmountOfBudget(budgetByMonth, currentMonth);
                             intervalDays = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
-                            //totalAmount += dailyAmount * intervalDays;
                         }
                         totalAmount += dailyAmount * intervalDays;
                     }
@@ -93,7 +89,7 @@ namespace RefactorTdd
             return start.ToString("yyyyMM") == end.ToString("yyyyMM");
         }
 
-        private static int AmountPerDayInMonth(Budget budgetByMonth, DateTime tempDate)
+        private static int DailyAmountOfBudget(Budget budgetByMonth, DateTime tempDate)
         {
             return budgetByMonth.Amount / DateTime.DaysInMonth(tempDate.Year, tempDate.Month);
         }
