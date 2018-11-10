@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RefactorTdd
@@ -26,18 +27,11 @@ namespace RefactorTdd
 
             var budgets = _repo.GetAll();
 
-            //if (IsSameMonth(period.Start, period.End))
-            //{
-            //    var budget = budgets.SingleOrDefault(x => x.YearMonth.Equals(period.Start.ToString("yyyyMM")));
-            //    if (budget == null)
-            //    {
-            //        return 0;
-            //    }
+            return OverlappingAmountBetweenBudgets(period, budgets);
+        }
 
-            //    return budget.IntervalAmount(period);
-            //}
-            //else
-            //{
+        private static double OverlappingAmountBetweenBudgets(Period period, List<Budget> budgets)
+        {
             DateTime currentMonth = new DateTime(period.Start.Year, period.Start.Month, 1);
             double totalAmount = 0;
             do
@@ -52,7 +46,6 @@ namespace RefactorTdd
             } while (currentMonth <= period.End);
 
             return totalAmount;
-            //}
         }
 
         private static bool IsSameMonth(DateTime start, DateTime end)
