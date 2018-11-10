@@ -3,6 +3,18 @@ using System.Linq;
 
 namespace RefactorTdd
 {
+    public class Period
+    {
+        public Period(DateTime start, DateTime end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public DateTime Start { get; private set; }
+        public DateTime End { get; private set; }
+    }
+
     public class BudgetService
     {
         private readonly IBudgetRepo _repo;
@@ -46,7 +58,7 @@ namespace RefactorTdd
                     var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        var intervalDays = IntervalDays(start, end, budgetByMonth);
+                        var intervalDays = IntervalDays(new Period(start, end), budgetByMonth);
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
@@ -57,19 +69,19 @@ namespace RefactorTdd
             }
         }
 
-        private static int IntervalDays(DateTime start, DateTime end, Budget budgetByMonth)
+        private static int IntervalDays(Period period, Budget budgetByMonth)
         {
             DateTime intervalStart;
             DateTime intervalEnd;
-            if (IsFirstMonth(start, budgetByMonth.FirstDayOfMonth()))
+            if (IsFirstMonth(period.Start, budgetByMonth.FirstDayOfMonth()))
             {
-                intervalStart = start;
+                intervalStart = period.Start;
                 intervalEnd = budgetByMonth.LastDay();
             }
-            else if (IsLastMonth(end, budgetByMonth.FirstDayOfMonth()))
+            else if (IsLastMonth(period.End, budgetByMonth.FirstDayOfMonth()))
             {
                 intervalStart = budgetByMonth.FirstDayOfMonth();
-                intervalEnd = end;
+                intervalEnd = period.End;
             }
             else
             {
