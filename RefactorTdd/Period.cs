@@ -20,6 +20,7 @@ namespace RefactorTdd
                 return 0;
             }
 
+            var another = new Period(budgetByMonth.FirstDay(), budgetByMonth.LastDay());
             var firstDay = budgetByMonth.FirstDay();
             var lastDay = budgetByMonth.LastDay();
             if (End < firstDay || Start > lastDay)
