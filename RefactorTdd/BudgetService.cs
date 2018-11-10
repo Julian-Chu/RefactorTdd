@@ -50,7 +50,7 @@ namespace RefactorTdd
                         int intervalDays = 0;
                         if (IsFirstMonth(start, currentMonth))
                         {
-                            intervalDays = (DateTime.DaysInMonth(start.Year, start.Month) - start.Day + 1);
+                            intervalDays = IntervalDays(start);
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
@@ -68,6 +68,15 @@ namespace RefactorTdd
 
                 return totalAmount;
             }
+        }
+
+        private static int IntervalDays(DateTime start)
+        {
+            var intervalEndDay = DateTime.DaysInMonth(start.Year, start.Month);
+            var intervalEnd = new DateTime(start.Year, start.Month, intervalEndDay);
+
+            var intervalStart = start;
+            return (intervalEnd - intervalStart).Days + 1;
         }
 
         private static bool IsLastMonth(DateTime end, DateTime currentMonth)
