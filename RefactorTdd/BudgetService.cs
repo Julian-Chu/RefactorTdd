@@ -19,7 +19,7 @@ namespace RefactorTdd
         public double TotalAmount(DateTime start, DateTime end)
         {
             var period = new Period(start, end);
-            if (!IsValidDateRange(period.Start, period.End))
+            if (!IsValidDateRange(period))
             {
                 return 0;
             }
@@ -62,9 +62,9 @@ namespace RefactorTdd
             return start.ToString("yyyyMM") == end.ToString("yyyyMM");
         }
 
-        private static bool IsValidDateRange(DateTime start, DateTime end)
+        private static bool IsValidDateRange(Period period)
         {
-            return start <= end;
+            return period.Start <= period.End;
         }
 
         private static int DaysInterval(DateTime start, DateTime end)
