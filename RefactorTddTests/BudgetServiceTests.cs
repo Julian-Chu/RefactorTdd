@@ -92,6 +92,14 @@ namespace RefactorTdd.Tests
             var totalAmount = _budgetService.TotalAmount(new DateTime(2018, 1, 27), new DateTime(2018, 1, 29));
             AmountShouldBe(0, totalAmount);
         }
+
+        [TestMethod()]
+        public void Period_no_overlap_after_budget()
+        {
+            _fakeBudgetRepo.AddBudget("201802", 280);
+            var totalAmount = _budgetService.TotalAmount(new DateTime(2018, 3, 27), new DateTime(2018, 3, 29));
+            AmountShouldBe(0, totalAmount);
+        }
     }
 
     public class FakeBudgetRepo : IBudgetRepo
