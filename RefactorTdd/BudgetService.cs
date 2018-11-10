@@ -35,7 +35,8 @@ namespace RefactorTdd
                 }
 
                 var dailyAmount = budget.DailyAmount();
-                var intervalDays = DaysInterval(period.Start, period.End);
+                var intervalDays = period.IntervalDays(budget);
+                //var intervalDays = DaysInterval(period.Start, period.End);
                 return dailyAmount * intervalDays;
             }
             else
