@@ -47,7 +47,6 @@ namespace RefactorTdd
                         budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        int intervalDays = 0;
                         DateTime intervalStart;
                         DateTime intervalEnd;
                         if (IsFirstMonth(start, currentMonth))
@@ -66,7 +65,7 @@ namespace RefactorTdd
                             intervalEnd = LastDayOfMonth(currentMonth);
                         }
 
-                        intervalDays = (intervalEnd - intervalStart).Days + 1;
+                        var intervalDays = (intervalEnd - intervalStart).Days + 1;
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
