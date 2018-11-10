@@ -43,8 +43,7 @@ namespace RefactorTdd
                 double totalAmount = 0;
                 do
                 {
-                    var budgetByMonth =
-                        budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
+                    var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
                         DateTime intervalStart;
@@ -56,12 +55,12 @@ namespace RefactorTdd
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
-                            intervalStart = FirstDayofMonth(end);
+                            intervalStart = FirstDayOfMonth(end);
                             intervalEnd = end;
                         }
                         else
                         {
-                            intervalStart = FirstDayofMonth(currentMonth);
+                            intervalStart = FirstDayOfMonth(currentMonth);
                             intervalEnd = LastDayOfMonth(currentMonth);
                         }
 
@@ -76,7 +75,7 @@ namespace RefactorTdd
             }
         }
 
-        private static DateTime FirstDayofMonth(DateTime end)
+        private static DateTime FirstDayOfMonth(DateTime end)
         {
             var intervalStart = new DateTime(end.Year, end.Month, 1);
             return intervalStart;
