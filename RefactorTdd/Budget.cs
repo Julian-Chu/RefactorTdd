@@ -38,7 +38,7 @@ namespace RefactorTdd
 
         public double IntervalAmount(Period period)
         {
-            return DailyAmount() * period.IntervalDays(this);
+            return DailyAmount() * period.IntervalDays(new Period(this.FirstDay(), this.LastDay()));
         }
     }
 }

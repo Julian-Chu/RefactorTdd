@@ -13,14 +13,13 @@ namespace RefactorTdd
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
 
-        public int IntervalDays(Budget budgetByMonth)
+        public int IntervalDays(Period another)
         {
             if (Start > End)
             {
                 return 0;
             }
 
-            var another = new Period(budgetByMonth.FirstDay(), budgetByMonth.LastDay());
             if (End < another.Start || Start > another.End)
             {
                 return 0;
