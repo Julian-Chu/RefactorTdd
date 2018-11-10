@@ -3,51 +3,6 @@ using System.Linq;
 
 namespace RefactorTdd
 {
-    public class Period
-    {
-        public Period(DateTime start, DateTime end)
-        {
-            Start = start;
-            End = end;
-        }
-
-        public DateTime Start { get; private set; }
-        public DateTime End { get; private set; }
-
-        public int IntervalDays(Budget budgetByMonth)
-        {
-            DateTime intervalEnd = End;
-            if (End > budgetByMonth.LastDay())
-            {
-                intervalEnd = budgetByMonth.LastDay();
-            }
-
-            DateTime intervalStart = Start;
-            if (Start < budgetByMonth.FirstDay())
-            {
-                intervalStart = budgetByMonth.FirstDay();
-            }
-
-            //if (budgetByMonth.FirstDay().ToString("yyyyMM") == Start.ToString("yyyyMM"))
-            //{
-            //    intervalStart = Start;
-            //    intervalEnd = budgetByMonth.LastDay();
-            //}
-            //else if (budgetByMonth.FirstDay().ToString("yyyyMM") == End.ToString("yyyyMM"))
-            //{
-            //    intervalStart = budgetByMonth.FirstDay();
-            //    intervalEnd = End;
-            //}
-            //else
-            //{
-            //    intervalStart = budgetByMonth.FirstDay();
-            //    intervalEnd = budgetByMonth.LastDay();
-            //}
-
-            return (intervalEnd - intervalStart).Days + 1;
-        }
-    }
-
     public class BudgetService
     {
         private readonly IBudgetRepo _repo;
