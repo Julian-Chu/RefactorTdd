@@ -25,6 +25,10 @@ namespace RefactorTdd
                 return 0;
             }
 
+            if (Start > budgetByMonth.LastDay())
+            {
+                return 0;
+            }
             DateTime intervalEnd = End;
             if (End > budgetByMonth.LastDay())
             {
