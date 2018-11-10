@@ -58,7 +58,7 @@ namespace RefactorTdd
                         }
                         else
                         {
-                            intervalDays = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
+                            intervalDays = IntervalDays(FirstDayofMonth(currentMonth), LastDayOfMonth(currentMonth));
                         }
                         totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
