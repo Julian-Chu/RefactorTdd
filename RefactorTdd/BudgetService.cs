@@ -90,21 +90,7 @@ namespace RefactorTdd
                 intervalEnd = budgetByMonth.LastDay();
             }
 
-            var intervalDays = (intervalEnd - intervalStart).Days + 1;
-            return intervalDays;
-        }
-
-        private static DateTime FirstDayOfMonth(DateTime end)
-        {
-            var intervalStart = new DateTime(end.Year, end.Month, 1);
-            return intervalStart;
-        }
-
-        private static DateTime LastDayOfMonth(DateTime start)
-        {
-            var intervalEndDay = DateTime.DaysInMonth(start.Year, start.Month);
-            var intervalEnd = new DateTime(start.Year, start.Month, intervalEndDay);
-            return intervalEnd;
+            return (intervalEnd - intervalStart).Days + 1;
         }
 
         private static bool IsLastMonth(DateTime end, DateTime currentMonth)
