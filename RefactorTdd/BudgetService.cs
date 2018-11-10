@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RefactorTdd
 {
@@ -31,13 +32,7 @@ namespace RefactorTdd
 
         private static double OverlappingAmountBetweenBudgets(Period period, List<Budget> budgets)
         {
-            double totalAmount = 0;
-            foreach (var budgetByMonth in budgets)
-            {
-                totalAmount += budgetByMonth.IntervalAmount(period);
-            }
-
-            return totalAmount;
+            return budgets.Sum(b => b.IntervalAmount(period));
         }
 
         private static bool IsSameMonth(DateTime start, DateTime end)
