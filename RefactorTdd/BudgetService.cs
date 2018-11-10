@@ -16,23 +16,33 @@ namespace RefactorTdd
 
         public int IntervalDays(Budget budgetByMonth)
         {
-            DateTime intervalStart;
-            DateTime intervalEnd;
-            if (budgetByMonth.FirstDay().ToString("yyyyMM") == Start.ToString("yyyyMM"))
+            DateTime intervalEnd = End;
+            if (End > budgetByMonth.LastDay())
             {
-                intervalStart = Start;
                 intervalEnd = budgetByMonth.LastDay();
             }
-            else if (budgetByMonth.FirstDay().ToString("yyyyMM") == End.ToString("yyyyMM"))
+
+            DateTime intervalStart = Start;
+            if (Start < budgetByMonth.FirstDay())
             {
                 intervalStart = budgetByMonth.FirstDay();
-                intervalEnd = End;
             }
-            else
-            {
-                intervalStart = budgetByMonth.FirstDay();
-                intervalEnd = budgetByMonth.LastDay();
-            }
+
+            //if (budgetByMonth.FirstDay().ToString("yyyyMM") == Start.ToString("yyyyMM"))
+            //{
+            //    intervalStart = Start;
+            //    intervalEnd = budgetByMonth.LastDay();
+            //}
+            //else if (budgetByMonth.FirstDay().ToString("yyyyMM") == End.ToString("yyyyMM"))
+            //{
+            //    intervalStart = budgetByMonth.FirstDay();
+            //    intervalEnd = End;
+            //}
+            //else
+            //{
+            //    intervalStart = budgetByMonth.FirstDay();
+            //    intervalEnd = budgetByMonth.LastDay();
+            //}
 
             return (intervalEnd - intervalStart).Days + 1;
         }
