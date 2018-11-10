@@ -74,12 +74,12 @@ namespace RefactorTdd
         {
             DateTime intervalStart;
             DateTime intervalEnd;
-            if (IsFirstMonth(period.Start, budgetByMonth.FirstDay()))
+            if (budgetByMonth.FirstDay().ToString("yyyyMM") == period.Start.ToString("yyyyMM"))
             {
                 intervalStart = period.Start;
                 intervalEnd = budgetByMonth.LastDay();
             }
-            else if (IsLastMonth(period.End, budgetByMonth.FirstDay()))
+            else if (budgetByMonth.FirstDay().ToString("yyyyMM") == period.End.ToString("yyyyMM"))
             {
                 intervalStart = budgetByMonth.FirstDay();
                 intervalEnd = period.End;
@@ -91,16 +91,6 @@ namespace RefactorTdd
             }
 
             return (intervalEnd - intervalStart).Days + 1;
-        }
-
-        private static bool IsLastMonth(DateTime end, DateTime currentMonth)
-        {
-            return currentMonth.ToString("yyyyMM") == end.ToString("yyyyMM");
-        }
-
-        private static bool IsFirstMonth(DateTime start, DateTime currentMonth)
-        {
-            return currentMonth.ToString("yyyyMM") == start.ToString("yyyyMM");
         }
 
         private static bool IsSameMonth(DateTime start, DateTime end)
