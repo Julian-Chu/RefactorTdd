@@ -20,21 +20,23 @@ namespace RefactorTdd
                 return 0;
             }
 
-            if (End < budgetByMonth.FirstDay() || Start > budgetByMonth.LastDay())
+            var firstDay = budgetByMonth.FirstDay();
+            var lastDay = budgetByMonth.LastDay();
+            if (End < firstDay || Start > lastDay)
             {
                 return 0;
             }
 
             DateTime intervalEnd = End;
-            if (End > budgetByMonth.LastDay())
+            if (End > lastDay)
             {
-                intervalEnd = budgetByMonth.LastDay();
+                intervalEnd = lastDay;
             }
 
             DateTime intervalStart = Start;
-            if (Start < budgetByMonth.FirstDay())
+            if (Start < firstDay)
             {
-                intervalStart = budgetByMonth.FirstDay();
+                intervalStart = firstDay;
             }
 
             return (intervalEnd - intervalStart).Days + 1;
