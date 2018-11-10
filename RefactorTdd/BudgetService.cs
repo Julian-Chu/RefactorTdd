@@ -54,7 +54,9 @@ namespace RefactorTdd
                         }
                         else if (IsLastMonth(end, currentMonth))
                         {
-                            intervalDays = end.Day;
+                            var intervalStart = new DateTime(end.Year, end.Month, 1);
+                            intervalDays = IntervalDays(intervalStart, end);
+                            //intervalDays = end.Day;
                         }
                         else
                         {
