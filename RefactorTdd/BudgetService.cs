@@ -82,8 +82,7 @@ namespace RefactorTdd
                     var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
                     if (budgetByMonth != null)
                     {
-                        var intervalDays = period.IntervalDays(budgetByMonth);
-                        totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
+                        totalAmount += budgetByMonth.DailyAmountOfBudget() * period.IntervalDays(budgetByMonth);
                     }
 
                     currentMonth = currentMonth.AddMonths(1);
