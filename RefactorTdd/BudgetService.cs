@@ -33,7 +33,7 @@ namespace RefactorTdd
                     return 0;
                 }
 
-                var dailyAmount = DailyAmountOfBudget(budget);
+                var dailyAmount = budget.DailyAmountOfBudget();
                 var intervalDays = DaysInterval(start, end);
                 return dailyAmount * intervalDays;
             }
@@ -60,7 +60,7 @@ namespace RefactorTdd
                         {
                             intervalDays = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
                         }
-                        totalAmount += DailyAmountOfBudget(budgetByMonth) * intervalDays;
+                        totalAmount += budgetByMonth.DailyAmountOfBudget() * intervalDays;
                     }
 
                     currentMonth = currentMonth.AddMonths(1);
@@ -83,11 +83,6 @@ namespace RefactorTdd
         private static bool IsSameMonth(DateTime start, DateTime end)
         {
             return start.ToString("yyyyMM") == end.ToString("yyyyMM");
-        }
-
-        private static int DailyAmountOfBudget(Budget budgetByMonth)
-        {
-            return budgetByMonth.Amount / DateTime.DaysInMonth(budgetByMonth.Year, budgetByMonth.Month);
         }
 
         private static bool IsValidDateRange(DateTime start, DateTime end)

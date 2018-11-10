@@ -24,5 +24,10 @@ namespace RefactorTdd
         {
             get { return FirstDayOfMonth().Month; }
         }
+
+        public int DailyAmountOfBudget()
+        {
+            return Amount / DateTime.DaysInMonth(Year, Month);
+        }
     }
 }
