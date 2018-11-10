@@ -53,7 +53,8 @@ namespace RefactorTdd
                         else if (IsLastMonth(end, currentMonth))
                             totalAmount += AmountPerDayInMonth(budgetByMonth, end) * end.Day;
                         else
-                            totalAmount += budgetByMonth.Amount;
+                            totalAmount += AmountPerDayInMonth(budgetByMonth, currentMonth) * DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
+                        //totalAmount += budgetByMonth.Amount;
                     }
 
                     currentMonth = currentMonth.AddMonths(1);
