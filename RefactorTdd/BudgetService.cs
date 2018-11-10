@@ -26,33 +26,33 @@ namespace RefactorTdd
 
             var budgets = _repo.GetAll();
 
-            if (IsSameMonth(period.Start, period.End))
+            //if (IsSameMonth(period.Start, period.End))
+            //{
+            //    var budget = budgets.SingleOrDefault(x => x.YearMonth.Equals(period.Start.ToString("yyyyMM")));
+            //    if (budget == null)
+            //    {
+            //        return 0;
+            //    }
+
+            //    return budget.IntervalAmount(period);
+            //}
+            //else
+            //{
+            DateTime currentMonth = new DateTime(period.Start.Year, period.Start.Month, 1);
+            double totalAmount = 0;
+            do
             {
-                var budget = budgets.SingleOrDefault(x => x.YearMonth.Equals(period.Start.ToString("yyyyMM")));
-                if (budget == null)
+                var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
+                if (budgetByMonth != null)
                 {
-                    return 0;
+                    totalAmount += budgetByMonth.IntervalAmount(period);
                 }
 
-                return budget.IntervalAmount(period);
-            }
-            else
-            {
-                DateTime currentMonth = new DateTime(period.Start.Year, period.Start.Month, 1);
-                double totalAmount = 0;
-                do
-                {
-                    var budgetByMonth = budgets.SingleOrDefault(x => x.YearMonth.Equals(currentMonth.ToString("yyyyMM")));
-                    if (budgetByMonth != null)
-                    {
-                        totalAmount += budgetByMonth.IntervalAmount(period);
-                    }
+                currentMonth = currentMonth.AddMonths(1);
+            } while (currentMonth <= period.End);
 
-                    currentMonth = currentMonth.AddMonths(1);
-                } while (currentMonth <= period.End);
-
-                return totalAmount;
-            }
+            return totalAmount;
+            //}
         }
 
         private static bool IsSameMonth(DateTime start, DateTime end)
