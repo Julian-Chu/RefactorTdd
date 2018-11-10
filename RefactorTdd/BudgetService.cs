@@ -48,24 +48,22 @@ namespace RefactorTdd
                     {
                         DateTime intervalStart;
                         DateTime intervalEnd;
-                        if (IsFirstMonth(start, currentMonth))
+                        if (IsFirstMonth(start, budgetByMonth.FirstDayOfMonth()))
+                        //if (IsFirstMonth(start, currentMonth))
                         {
                             intervalStart = start;
                             intervalEnd = budgetByMonth.LastDay();
-                            //intervalEnd = LastDayOfMonth(start);
                         }
-                        else if (IsLastMonth(end, currentMonth))
+                        else if (IsLastMonth(end, budgetByMonth.FirstDayOfMonth()))
+                        //else if (IsLastMonth(end, currentMonth))
                         {
                             intervalStart = budgetByMonth.FirstDayOfMonth();
-                            //intervalStart = FirstDayOfMonth(end);
                             intervalEnd = end;
                         }
                         else
                         {
                             intervalStart = budgetByMonth.FirstDayOfMonth();
                             intervalEnd = budgetByMonth.LastDay();
-                            //intervalStart = FirstDayOfMonth(currentMonth);
-                            //intervalEnd = LastDayOfMonth(currentMonth);
                         }
 
                         var intervalDays = (intervalEnd - intervalStart).Days + 1;
