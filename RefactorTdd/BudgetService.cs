@@ -91,7 +91,8 @@ namespace RefactorTdd
 
         private static int DailyAmountOfBudget(Budget budgetByMonth, DateTime tempDate)
         {
-            return budgetByMonth.Amount / DateTime.DaysInMonth(tempDate.Year, tempDate.Month);
+            return budgetByMonth.Amount / DateTime.DaysInMonth(budgetByMonth.Year, budgetByMonth.Month);
+            //return budgetByMonth.Amount / DateTime.DaysInMonth(tempDate.Year, tempDate.Month);
         }
 
         private static bool IsValidDateRange(DateTime start, DateTime end)
