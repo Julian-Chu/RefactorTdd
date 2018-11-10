@@ -15,20 +15,16 @@ namespace RefactorTdd
 
         public int IntervalDays(Budget budgetByMonth)
         {
-            if (!IsValidDateRange())
+            if (Start > End)
             {
                 return 0;
             }
 
-            if (End < budgetByMonth.FirstDay())
+            if (End < budgetByMonth.FirstDay() || Start > budgetByMonth.LastDay())
             {
                 return 0;
             }
 
-            if (Start > budgetByMonth.LastDay())
-            {
-                return 0;
-            }
             DateTime intervalEnd = End;
             if (End > budgetByMonth.LastDay())
             {
@@ -42,11 +38,6 @@ namespace RefactorTdd
             }
 
             return (intervalEnd - intervalStart).Days + 1;
-        }
-
-        private bool IsValidDateRange()
-        {
-            return Start <= End;
         }
     }
 }
