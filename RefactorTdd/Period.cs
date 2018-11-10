@@ -15,12 +15,12 @@ namespace RefactorTdd
 
         public int IntervalDays(Period another)
         {
-            if (Start > End)
+            if (IsInvalid())
             {
                 return 0;
             }
 
-            if (End < another.Start || Start > another.End)
+            if (HasNoOverlap(another))
             {
                 return 0;
             }
@@ -38,6 +38,16 @@ namespace RefactorTdd
             }
 
             return (intervalEnd - intervalStart).Days + 1;
+        }
+
+        private bool HasNoOverlap(Period another)
+        {
+            return End < another.Start || Start > another.End;
+        }
+
+        private bool IsInvalid()
+        {
+            return Start > End;
         }
     }
 }
