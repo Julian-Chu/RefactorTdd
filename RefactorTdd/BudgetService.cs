@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RefactorTdd
@@ -24,23 +25,7 @@ namespace RefactorTdd
                 return 0;
             }
 
-            var budgets = _repo.GetAll();
-            DateTime tempDate = new DateTime(start.Year, start.Month, 1);
-            double aggrAmount = 0;
-            do
-            {
-                var budgetByMonth =
-                    budgets.SingleOrDefault(x => x.YearMonth.Equals(tempDate.ToString("yyyyMM")));
-                if (budgetByMonth != null)
-                {
-                    aggrAmount += budgetByMonth.AmountPerDayInMonth *
-                                  budgetByMonth.Period.GetOverlapDays(period);
-                }
-
-                tempDate = tempDate.AddMonths(1);
-            } while (tempDate <= end);
-
-            return aggrAmount;
+            return _repo.GetAll().Sum(b => b.AmountPerDayInMonth * b.Period.GetOverlapDays(period));
         }
     }
 }

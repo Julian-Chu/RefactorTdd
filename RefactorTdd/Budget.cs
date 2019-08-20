@@ -16,8 +16,8 @@ namespace RefactorTdd
 		{
 			get
 			{
-				DateTime start = new DateTime(Date.Year, Date.Month, 1);
-				DateTime end = start.AddMonths(1).AddDays(-1);
+				var start = new DateTime(Date.Year, Date.Month, 1);
+				var end = start.AddMonths(1).AddDays(-1);
 				return new Period(start, end);
 			}
 		}
