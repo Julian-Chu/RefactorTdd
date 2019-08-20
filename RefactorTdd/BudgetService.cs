@@ -18,7 +18,8 @@ namespace RefactorTdd
 
         public double TotalAmount(DateTime start, DateTime end)
         {
-            if (!Period.IsValidDateRange(start, end))
+            var period = new Period(start,end);
+            if (!period.IsValidDateRange())
             {
                 return 0;
             }
@@ -32,26 +33,14 @@ namespace RefactorTdd
                     budgets.SingleOrDefault(x => x.YearMonth.Equals(tempDate.ToString("yyyyMM")));
                 if (budgetByMonth != null)
                 {
-                    var tempEnd = tempDate.AddMonths(1) <= end ? tempDate.AddMonths(1).AddDays(-1) : end;
-                    var tempStart = tempDate <= start ? start : tempDate;
-                    aggrAmount += budgetByMonth.AmountPerDayInMonth*
-                                  DaysInterval(tempStart, tempEnd);
+                    aggrAmount += budgetByMonth.AmountPerDayInMonth *
+                                  budgetByMonth.Period.GetOverlapDays(period);
                 }
 
                 tempDate = tempDate.AddMonths(1);
             } while (tempDate <= end);
 
             return aggrAmount;
-        }
-
-        private static bool IsSameMonth(DateTime start, DateTime end)
-        {
-            return start.ToString("yyyyMM") == end.ToString("yyyyMM");
-        }
-
-        private static int DaysInterval(DateTime start, DateTime end)
-        {
-            return end.Subtract(start).Days + 1;
         }
     }
 }

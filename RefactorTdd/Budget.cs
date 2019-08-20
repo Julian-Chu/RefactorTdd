@@ -11,5 +11,15 @@ namespace RefactorTdd
 		public int AmountPerDayInMonth => Amount / DateTime.DaysInMonth(Date.Year, Date.Month);
 
 		private DateTime Date => DateTime.ParseExact(YearMonth, "yyyyMM", CultureInfo.InvariantCulture);
+
+		public Period Period
+		{
+			get
+			{
+				DateTime start = new DateTime(Date.Year, Date.Month, 1);
+				DateTime end = start.AddMonths(1).AddDays(-1);
+				return new Period(start, end);
+			}
+		}
 	}
 }
